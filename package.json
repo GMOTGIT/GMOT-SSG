@@ -1,0 +1,17 @@
+{
+  "name": "gmot-ssg",
+  "version": "1.0.0",
+  "description": "Gustavo Martinez SSG for OSD600",
+  "main": "GMOT-SSG.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "SSG"
+  ],
+  "author": "Gustavo Tavares",
+  "license": "MIT",
+  "dependencies": {
+    "yargs": "^17.1.1"
+  }
+}
