@@ -17,7 +17,6 @@ const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 
 const htmlMaker = require("./htmlMaker");
-const removeFolder = require("./removeFolder");
 
 const argv = yargs(hideBin(process.argv))
   .usage("Usage: $0 <command> [file or directory]")
@@ -38,6 +37,7 @@ const argv = yargs(hideBin(process.argv))
   .alias("v", "version")
   .epilog("copyright 2021").argv;
 
+console.log(__dirname);
 //Check for Arguments
 if (!argv.i) {
   console.error("One or more txt files or a directory are needed");
@@ -53,22 +53,31 @@ if (argv.o) {
 }
 
 //If no custom output, if none then make Dist. if Dist already exist, replace it.
+
 if (!argv.o) {
   if (fs.existsSync("./dist")) {
-    removeFolder("./dist");
+    const oldFiles = fs.readdirSync("./dist");
 
-    fs.mkdir("./dist", { recursive: true }, function (err) {
-      if (err) {
-        console.log(err);
-      }
-    });
-  } else {
-    fs.mkdir("./dist", { recursive: true }, function (err) {
-      if (err) {
-        console.log(err);
-      }
-    });
+    //check if there is files inside the folder
+    if (oldFiles.length > 0) {
+      oldFiles.forEach((oldFile) => {
+        if (fs.statSync("./dist" + "/" + oldFile).isDirectory()) {
+          removeDir("./dist" + "/" + oldFile);
+        } else {
+          fs.unlinkSync("./dist" + "/" + oldFile);
+        }
+      });
+    }
+    //if its empty just remove it
+    fs.rmdirSync("./dist");
   }
+
+  // Make dist directory
+  fs.mkdir("./dist", { recursive: true }, function (err) {
+    if (err) {
+      console.log(err);
+    }
+  });
 }
 
 //Check for input -- Do i need to check it again?
