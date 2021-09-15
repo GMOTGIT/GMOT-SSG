@@ -45,7 +45,7 @@ example.html
 # How do I use it?
 ```
   To use this tool, you need to type in the CLI the following:
-  node GMOT-SSG.js -i <file> <option> 
+  node GMOT-SSG.js -i <file> -o <output> -s <stylesheet>
   
   examples:
   node GMOT-SSG.js -i text.txt text2.txt -o C:\user\example\output -s stylesheetlink
