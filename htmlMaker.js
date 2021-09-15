@@ -1,5 +1,4 @@
 const fs = require("fs");
-const { argv } = require("process");
 
 module.exports = htmlMaker = (txtInput, argv_o, argv_s, argv_i) => {
   //Ignore non txt files
