@@ -1,11 +1,8 @@
 #!/usr/bin/env node
 
-// TODO:
-//Check for redundant code
-
 //Optional Features
 // -s --stylesheet
-// -o --output
+// -o --output // also create a new dir if it does not exist
 // <h1>Title</h1>
 //read mix input, relative or absolute paths - ex: my ssg -i thisIsaTxtfile.txt thisIsaDirectory C://user/Desktop/thisIsAlsoAnotherDirectory
 
@@ -37,7 +34,6 @@ const argv = yargs(hideBin(process.argv))
   .alias("v", "version")
   .epilog("copyright 2021").argv;
 
-console.log(__dirname);
 //Check for Arguments
 if (!argv.i) {
   console.error("One or more txt files or a directory are needed");
@@ -47,8 +43,15 @@ if (!argv.i) {
 if (argv.o) {
   if (!fs.existsSync(argv.o) && !fs.existsSync("./" + argv.o)) {
     //check this condition
-    console.error("Output is not a valid Directory: ", argv.o);
-    return;
+    if (typeof argv.o == "boolean") {
+      console.error("Output directory is invalid");
+      return;
+    }
+    fs.mkdir(argv.o, { recursive: true }, function (err) {
+      if (err) {
+        console.log(err);
+      }
+    });
   }
 }
 
