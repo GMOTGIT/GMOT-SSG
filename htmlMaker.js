@@ -87,7 +87,7 @@ ${paragraphs}
         }
 
         fs.writeFile(
-          `./${argv_o}/${txtInput.split(".txt").shift()}}.html`,
+          `./${argv_o}/${txtInput.split(".txt").shift()}.html`,
           content,
           (err) => {
             if (err) {
@@ -105,7 +105,7 @@ ${paragraphs}
         var path = txtInput.substring(txtInput.length, index);
 
         fs.writeFile(
-          `${"./dist" + path.split(".txt").shift()}}.html`,
+          `${"./dist" + path.split(".txt").shift()}.html`,
           content,
           (err) => {
             if (err) {
@@ -119,7 +119,7 @@ ${paragraphs}
       }
 
       fs.writeFile(
-        `${"./dist/" + txtInput.split(".txt").shift()}}.html`,
+        `${"./dist/" + txtInput.split(".txt").shift()}.html`,
         content,
         (err) => {
           if (err) {
