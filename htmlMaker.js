@@ -1,8 +1,9 @@
 const fs = require("fs");
+const path = require("path");
 
 module.exports = htmlMaker = (txtInput, argv_o, argv_s, argv_i) => {
   //Ignore non txt files
-  if (txtInput.indexOf(".txt") == -1) {
+  if (txtInput.indexOf(".txt") == -1 && path.extname(txtInput) != '.md') {
     console.error("File ignored, not a txt format: ", txtInput);
     return;
   }
@@ -66,15 +67,8 @@ ${paragraphs}
 
       if (argv_o) {
         if (argv_o.indexOf("./") == -1) {
-          if (txtInput.includes("\\")) {
-            //check if receiving an absolute path
-            let index = txtInput.lastIndexOf("\\");
-            let path = txtInput.substring(txtInput.length, index);
-            txtInput = path.split(".txt").shift();
-          }
-
           fs.writeFile(
-            `${argv_o}/${txtInput.split(".txt").shift()}.html`,
+            `${argv_o}/${path.parse(path.basename(txtInput)).name}.html`,
             content,
             (err) => {
               if (err) {
@@ -87,7 +81,7 @@ ${paragraphs}
         }
 
         fs.writeFile(
-          `./${argv_o}/${txtInput.split(".txt").shift()}.html`,
+          `./${argv_o}/${path.parse(path.basename(txtInput)).name}.html`,
           content,
           (err) => {
             if (err) {
@@ -101,11 +95,8 @@ ${paragraphs}
 
       //Check if input file has absolute path
       if (txtInput.includes("\\")) {
-        let index = txtInput.lastIndexOf("\\");
-        var path = txtInput.substring(txtInput.length, index);
-
         fs.writeFile(
-          `${"./dist" + path.split(".txt").shift()}.html`,
+          `${"./dist" + path.parse(path.basename(txtInput)).name}.html`,
           content,
           (err) => {
             if (err) {
@@ -119,7 +110,7 @@ ${paragraphs}
       }
 
       fs.writeFile(
-        `${"./dist/" + txtInput.split(".txt").shift()}.html`,
+        `${"./dist/" + path.parse(path.basename(txtInput)).name}.html`,
         content,
         (err) => {
           if (err) {
