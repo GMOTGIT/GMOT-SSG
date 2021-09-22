@@ -46,7 +46,12 @@ module.exports = htmlMaker = (txtInput, argv_o, argv_s, argv_i) => {
       let title = lines.shift();
       lines.forEach((string) => {
         if (path.extname(txtInput) == '.md') {
-          string = handleMarkdown(string);
+          string = string
+            .replace(/\*{2,}(.*?)\*{2,}/g, '<b>$1</b>')
+            .replace(/\*(.*?)\*/g, '<i>$1</i>')
+            .replace(/^# (.*$)/, '<h1>$1</h1>')
+            .replace(/^## (.*$)/, '<h2>$1</h2>')
+            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
         }
         paragraphs += `<p>${string}</p>\n`;
       });
@@ -127,12 +132,3 @@ ${paragraphs}
     }
   );
 };
-
-const handleMarkdown = (string) => {
-  return string
-    .replace(/\*{2,}(.*?)\*{2,}/g, '<b>$1</b>')
-    .replace(/\*(.*?)\*/g, '<i>$1</i>')
-    .replace(/^# (.*$)/, '<h1>$1</h1>')
-    .replace(/^## (.*$)/, '<h2>$1</h2>')
-    .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
-}
