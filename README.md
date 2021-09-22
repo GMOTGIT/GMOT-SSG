@@ -76,8 +76,8 @@ By default, this tool will create a "dist" directory in its folder where the out
 
 | MD File | HTML File | Webpage |
 | ------------- | ------------- | ------------- |
-| ```\*\*Bold Text\*\*``` | ```<b>Bold Text</b>``` | **Bold Text** |
-| ```\*Italic Text\*``` | ```<i>Italic Text</i>``` | *Italic Text* |
+| ```**Bold Text**``` | ```<b>Bold Text</b>``` | **Bold Text** |
+| ```*Italic Text*``` | ```<i>Italic Text</i>``` | *Italic Text* |
 | ```# H1 Heading``` | ```<h1>H1 Heading</h1>``` | <h1>H1 Heading</h1> |
 | ```## H2 Heading``` | ```<h2>H2 Heading</h2>``` | <h2>H2 Heading</h2> |
 | ```[GitHub](https://github.com/)``` | ```<a href="https://github.com/">GitHub</a>``` | [GitHub](https://github.com/) |
