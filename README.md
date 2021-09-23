@@ -71,8 +71,53 @@ By default, this tool will create a "dist" directory in its folder where the out
    -o --output for custom output paths
    It also accepts mixed input, txt files and directories.
    ```
-    
-    
+   
+# Additional support for md (markdown) files
 
-  
+| MD File | HTML File | Webpage |
+| ------------- | ------------- | ------------- |
+| ```**Bold Text**``` | ```<b>Bold Text</b>``` | **Bold Text** |
+| ```*Italic Text*``` | ```<i>Italic Text</i>``` | *Italic Text* |
+| ```# H1 Heading``` | ```<h1>H1 Heading</h1>``` | <h1>H1 Heading</h1> |
+| ```## H2 Heading``` | ```<h2>H2 Heading</h2>``` | <h2>H2 Heading</h2> |
+| ```[GitHub](https://github.com/)``` | ```<a href="https://github.com/">GitHub</a>``` | [GitHub](https://github.com/) |
+
+# For Example (md files):
+```
+README Excerpt
+
+
+# [GMOT-SSG](https://github.com/GMOTGIT/GMOT-SSG)
+
+OSD600 0.1 - SSG
+
+## SSG - Static Site Generator 
+
+## What this tool does?
+
+This tool will receive a **input txt file(files)** or **directory(directories)** and transform it in an *HTML page(pages)*.
+```
+
+will become:
+
+```
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>README Excerpt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+<h1>README Excerpt</h1>
+<p><h1><a href="https://github.com/GMOTGIT/GMOT-SSG">GMOT-SSG</a></h1></p>
+<p>OSD600 0.1 - SSG</p>
+<p><h2>SSG - Static Site Generator </h2></p>
+<p><h2>What this tool does?</h2></p>
+<p>This tool will receive a <b>input txt file(files)</b> or <b>directory(directories)</b> and transform it in an <i>HTML page(pages)</i>.</p>
+
+</body>
+</html>
+```
   

@@ -1,8 +1,9 @@
 const fs = require("fs");
+const path = require("path");
 
 module.exports = htmlMaker = (txtInput, argv_o, argv_s, argv_i) => {
   //Ignore non txt files
-  if (txtInput.indexOf(".txt") == -1) {
+  if (txtInput.indexOf(".txt") == -1 && path.extname(txtInput) != '.md') {
     console.error("File ignored, not a txt format: ", txtInput);
     return;
   }
@@ -44,7 +45,15 @@ module.exports = htmlMaker = (txtInput, argv_o, argv_s, argv_i) => {
 
       let title = lines.shift();
       lines.forEach((string) => {
-        paragraphs += `<p>${string}</p>\n`;
+        if (path.extname(txtInput) == '.md') {
+          string = string
+            .replace(/\*{2,}(.*?)\*{2,}/g, '<b>$1</b>')
+            .replace(/\*(.*?)\*/g, '<i>$1</i>')
+            .replace(/^##((.|\s)*$)/, '<h2>$1</h2>')
+            .replace(/^#((.|\s)*$)/, '<h1>$1</h1>')
+            .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+        }
+        paragraphs += (string.match(/<h1>/) || string.match(/<h2>/)) ? `${string}\n` : `<p>${string}</p>\n`;
       });
 
       let h1 = title ? `<h1>${title}</h1>` : "";
@@ -66,15 +75,8 @@ ${paragraphs}
 
       if (argv_o) {
         if (argv_o.indexOf("./") == -1) {
-          if (txtInput.includes("\\")) {
-            //check if receiving an absolute path
-            let index = txtInput.lastIndexOf("\\");
-            let path = txtInput.substring(txtInput.length, index);
-            txtInput = path.split(".txt").shift();
-          }
-
           fs.writeFile(
-            `${argv_o}/${txtInput.split(".txt").shift()}.html`,
+            `${argv_o}/${path.parse(path.basename(txtInput)).name}.html`,
             content,
             (err) => {
               if (err) {
@@ -87,7 +89,7 @@ ${paragraphs}
         }
 
         fs.writeFile(
-          `./${argv_o}/${txtInput.split(".txt").shift()}.html`,
+          `./${argv_o}/${path.parse(path.basename(txtInput)).name}.html`,
           content,
           (err) => {
             if (err) {
@@ -101,11 +103,8 @@ ${paragraphs}
 
       //Check if input file has absolute path
       if (txtInput.includes("\\")) {
-        let index = txtInput.lastIndexOf("\\");
-        var path = txtInput.substring(txtInput.length, index);
-
         fs.writeFile(
-          `${"./dist" + path.split(".txt").shift()}.html`,
+          `${"./dist" + path.parse(path.basename(txtInput)).name}.html`,
           content,
           (err) => {
             if (err) {
@@ -119,7 +118,7 @@ ${paragraphs}
       }
 
       fs.writeFile(
-        `${"./dist/" + txtInput.split(".txt").shift()}.html`,
+        `${"./dist/" + path.parse(path.basename(txtInput)).name}.html`,
         content,
         (err) => {
           if (err) {
