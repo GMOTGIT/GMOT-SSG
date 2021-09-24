@@ -100,12 +100,11 @@ if (!argv.o) {
 //Check if input is directory
 
 argv.i.forEach((input) => {
-  //this variable will hold stats for the input, THIS IS AN IMPORTANT STEP
-
   if (!fs.existsSync(path.normalize(input))) {
     console.error(`Input Ignored: ${input} is not a file or Directory!`);
     return;
   }
+
   let checkInput = fs.statSync(path.normalize(input));
 
   if (checkInput && checkInput.isDirectory()) {
