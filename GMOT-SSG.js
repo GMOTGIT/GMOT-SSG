@@ -12,8 +12,10 @@
 const fs = require("fs");
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
+const path = require("path");
 
 const htmlMaker = require("./htmlMaker");
+const { Console } = require("console");
 
 const argv = yargs(hideBin(process.argv))
   .usage("Usage: $0 <command> [file or directory]")
@@ -36,20 +38,31 @@ const argv = yargs(hideBin(process.argv))
 
 //Check for Arguments
 if (!argv.i) {
+  // print a useful error message
   console.error("One or more txt files or a directory are needed");
+  // exit the program with a non-zero return code
+  process.exit(1);
+}
+
+if (!argv.i.length > 0) {
+  console.error("Error: List of input is empty!");
+  process.exit(1);
 }
 
 //check if output is valid
 if (argv.o) {
-  if (!fs.existsSync(argv.o) && !fs.existsSync("./" + argv.o)) {
+  if (!fs.existsSync(argv.o)) {
     //check this condition
     if (typeof argv.o == "boolean") {
-      console.error("Output directory is invalid");
-      return;
+      // print a useful error message
+      console.error("Missing Output Directory");
+      // exit the program with a non-zero return code
+      process.exit(1);
     }
-    fs.mkdir(argv.o, { recursive: true }, function (err) {
+    fs.mkdirSync(path.normalize(argv.o), { recursive: true }, function (err) {
       if (err) {
-        console.log(err);
+        console.error("An error have ocurred: ", err);
+        process.exit(1);
       }
     });
   }
@@ -64,10 +77,10 @@ if (!argv.o) {
     //check if there is files inside the folder
     if (oldFiles.length > 0) {
       oldFiles.forEach((oldFile) => {
-        if (fs.statSync("./dist" + "/" + oldFile).isDirectory()) {
-          removeDir("./dist" + "/" + oldFile);
+        if (fs.statSync("./dist/" + oldFile).isDirectory()) {
+          removeDir("./dist/" + oldFile);
         } else {
-          fs.unlinkSync("./dist" + "/" + oldFile);
+          fs.unlinkSync("./dist/" + oldFile);
         }
       });
     }
@@ -76,64 +89,38 @@ if (!argv.o) {
   }
 
   // Make dist directory
-  fs.mkdir("./dist", { recursive: true }, function (err) {
+  fs.mkdirSync("./dist", { recursive: true }, function (err) {
     if (err) {
-      console.log(err);
+      console.error("An error have ocurred: ", err);
+      process.exit(1);
     }
   });
 }
 
-//Check for input -- Do i need to check it again?
-//probably not
+//Check if input is directory
 
-if (argv.i && argv.i.length > 0) {
-  // this if can be removed
+argv.i.forEach((input) => {
+  //this variable will hold stats for the input, THIS IS AN IMPORTANT STEP
 
-  //Check if input is directory
-  argv.i.forEach((input, index) => {
-    let checkInput; //this variable will hold stats for the input, THIS IS AN IMPORTANT STEP
+  if (!fs.existsSync(path.normalize(input))) {
+    console.error(`Input Ignored: ${input} is not a file or Directory!`);
+    return;
+  }
+  let checkInput = fs.statSync(path.normalize(input));
 
-    let flag = false; //This flag is to control if file is in the root folder or is a full path to somewhere else
-    //flag is true if it is a path
-    if (input.indexOf(":") != -1) {
-      //if there is : then is a full Path
-      if (fs.existsSync(input)) {
-        checkInput = fs.statSync(input);
-        flag = true;
-      } else {
-        console.error(`"${input}" does not exist`);
-      }
+  if (checkInput && checkInput.isDirectory()) {
+    let files;
+
+    files = fs.readdirSync(path.normalize(input));
+
+    if (files) {
+      files.forEach((txtInput) => {
+        htmlMaker(txtInput, argv.o, argv.s, path.normalize(input));
+      });
     }
+  }
 
-    if (!flag) {
-      //if flag is false, file is in the root folder
-      if (fs.existsSync("./" + input)) {
-        checkInput = fs.statSync("./" + input);
-      } else {
-        console.error(`"${input}" does not exist`);
-      }
-    }
-
-    //check if input is a directory
-    //if it is, read the files inside it and write html of each
-    if (checkInput && checkInput.isDirectory()) {
-      let files;
-
-      if (flag) {
-        files = fs.readdirSync(input);
-      } else {
-        files = fs.readdirSync("./" + input);
-      }
-      if (files) {
-        files.forEach((txtInput) => {
-          htmlMaker(txtInput, argv.o, argv.s, argv.i[index], flag);
-        });
-      }
-    }
-
-    //check if its a file
-    if (checkInput && !checkInput.isDirectory()) {
-      htmlMaker(input, argv.o, argv.s, argv.i[index]); //here
-    }
-  });
-}
+  if (checkInput && !checkInput.isDirectory()) {
+    if (checkInput.isFile()) htmlMaker(input, argv.o, argv.s);
+  }
+});
