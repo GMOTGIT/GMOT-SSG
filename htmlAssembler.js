@@ -13,11 +13,12 @@ module.exports = htmlAssembler = (lines, txtInput, ss = "") => {
         .replace(/\*(.*?)\*/g, "<i>$1</i>")
         .replace(/^##((.|\s)*$)/, "<h2>$1</h2>")
         .replace(/^#((.|\s)*$)/, "<h1>$1</h1>")
+        .replace(/^---((.|\s)*$)/, "<hr>")
         .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
     }
 
     paragraphs +=
-      string.match(/<h1>/) || string.match(/<h2>/)
+      string.match(/<h1>/) || string.match(/<h2>/) || string.match(/<hr>/)
         ? `${string}\n`
         : `<p>${string}</p>\n`;
   });

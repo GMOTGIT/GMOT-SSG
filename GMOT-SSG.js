@@ -15,7 +15,6 @@ const { hideBin } = require("yargs/helpers");
 const path = require("path");
 
 const htmlMaker = require("./htmlMaker");
-const { Console } = require("console");
 
 const argv = yargs(hideBin(process.argv))
   .usage("Usage: $0 <command> [file or directory]")
