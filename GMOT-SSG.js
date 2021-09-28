@@ -95,7 +95,6 @@ if (!argv.o) {
 }
 
 //Check if input is directory
-console.log(argv.l, " IM HEREEEE");
 argv.i.forEach((input) => {
   if (!fs.existsSync(path.normalize(input))) {
     console.error(`Input Ignored: ${input} is not a file or Directory!`);
