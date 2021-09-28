@@ -6,16 +6,12 @@
 // <h1>Title</h1>
 //read mix input, relative or absolute paths - ex: my ssg -i thisIsaTxtfile.txt thisIsaDirectory C://user/Desktop/thisIsAlsoAnotherDirectory
 
-//Week 2 - Implement this:
-//use __dirname and __filename and path
-
 const fs = require("fs");
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 const path = require("path");
 
 const htmlMaker = require("./htmlMaker");
-const { Console } = require("console");
 
 const argv = yargs(hideBin(process.argv))
   .usage("Usage: $0 <command> [file or directory]")
@@ -23,6 +19,7 @@ const argv = yargs(hideBin(process.argv))
     "$0 SSG -i myExample.txt directoryPath",
     "myExample.html and txtFromDirectory.html is created"
   )
+  .alias("l", "lang")
   .alias("i", "input")
   .array("i")
   .describe("i", "Load a file or a directory")
@@ -98,7 +95,7 @@ if (!argv.o) {
 }
 
 //Check if input is directory
-
+console.log(argv.l, " IM HEREEEE");
 argv.i.forEach((input) => {
   if (!fs.existsSync(path.normalize(input))) {
     console.error(`Input Ignored: ${input} is not a file or Directory!`);
@@ -114,12 +111,12 @@ argv.i.forEach((input) => {
 
     if (files) {
       files.forEach((txtInput) => {
-        htmlMaker(txtInput, argv.o, argv.s, path.normalize(input));
+        htmlMaker(txtInput, argv.o, argv.s, path.normalize(input), argv.l);
       });
     }
   }
 
   if (checkInput && !checkInput.isDirectory()) {
-    if (checkInput.isFile()) htmlMaker(input, argv.o, argv.s);
+    if (checkInput.isFile()) htmlMaker(input, argv.o, argv.s, "", argv.l);
   }
 });

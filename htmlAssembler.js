@@ -1,6 +1,6 @@
 const path = require("path");
 
-module.exports = htmlAssembler = (lines, txtInput, ss = "") => {
+module.exports = htmlAssembler = (lines, txtInput, ss = "", argv_l) => {
   let paragraphs = "";
 
   lines = lines.toString().split(/\r?\n\r?\n/);
@@ -25,7 +25,7 @@ module.exports = htmlAssembler = (lines, txtInput, ss = "") => {
   let h1 = title ? `<h1>${title}</h1>` : "";
 
   const content = `<!doctype html>
-<html lang="en">
+<html lang="${argv_l}">
 <head>
 <meta charset="utf-8">
 <title>${title}</title>
