@@ -50,7 +50,8 @@ example.html
   examples:
   node GMOT-SSG.js -i text.txt text2.txt -o C:\user\example\output -s stylesheetlink
   node GMOT-SSG.js -input directory1 directory2 -output outputFolder  -stylesheet stylesheetlink
-  node GMOT-SSG.js -i text.txt directory1 text2.txt C:\user\example\directory2   
+  node GMOT-SSG.js -i text.txt directory1 text2.txt C:\user\example\directory2
+  node GMOT-SSG.js -c ./ssg-config.json   
   ```
   
 By default, this tool will create a "dist" directory in its folder where the output will be.
@@ -62,7 +63,7 @@ By default, this tool will create a "dist" directory in its folder where the out
   -o --output option, this option will place the output in your custom output directory.
   -v --version option, will display the current version of the program.
   -h --help option, will display the usage, options, and examples.
-  
+  -c --config option, will read the config JSON file for arguments instead of command line.
   ```
   What optional features does it have?
   ```
