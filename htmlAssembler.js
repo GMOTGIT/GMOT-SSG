@@ -25,7 +25,6 @@ module.exports = htmlAssembler = (lines, txtInput, ss = "", argv_l) => {
 
   let styleSheet = ss ? `<link rel="stylesheet" href="${ss}"></link>` : "";
 
-  console.log(styleSheet);
   let h1 = title ? `<h1>${title}</h1>` : "";
 
   const content = `<!doctype html>

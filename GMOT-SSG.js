@@ -31,8 +31,22 @@ const argv = yargs(hideBin(process.argv))
   .describe("s", "Set a stylesheet for the template")
   .version()
   .alias("v", "version")
+  .alias("c", "config")
   .epilog("copyright 2021").argv;
 
+if (argv.c) {
+    try {
+      const jsonFile = fs.readFileSync(path.normalize(argv.c));
+      const data = JSON.parse(jsonFile);
+      argv.i = [data.input];
+      argv.s = data.stylesheet;
+      argv.l = data.lang || "en-CA";
+      argv.o = data.output || "./dist";
+    } catch (err) {
+      console.error("Unable to read JSON file.");
+      process.exit(1);
+    }
+}
 //Check for Arguments
 if (!argv.i) {
   // print a useful error message
