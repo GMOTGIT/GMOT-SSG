@@ -32,6 +32,7 @@ const argv = yargs(hideBin(process.argv))
   .version()
   .alias("v", "version")
   .alias("c", "config")
+  .describe("c", "Receive a Config File and read input from it")
   .epilog("copyright 2021").argv;
 
 if (argv.c) {
@@ -48,15 +49,10 @@ if (argv.c) {
     }
 }
 //Check for Arguments
-if (!argv.i) {
+if (!argv.i || !argv.i.length > 0) {
   // print a useful error message
-  console.error("One or more txt files or a directory are needed");
+  console.error("One or more txt files or a directory are needed.");
   // exit the program with a non-zero return code
-  process.exit(1);
-}
-
-if (!argv.i.length > 0) {
-  console.error("Error: List of input is empty!");
   process.exit(1);
 }
 
