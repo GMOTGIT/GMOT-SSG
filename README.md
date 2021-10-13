@@ -1,24 +1,28 @@
 # GMOT-SSG
+
 OSD600 0.1 - SSG
 
-## SSG - Static Site Generator 
-
+## SSG - Static Site Generator
 
 ## What this tool does?
-  This tool will receive a input txt file(files) or directory(directories) and transform it in an HTML page(pages).
-  
-# For Example:
-  ```
 
- example.txt:
- 
- "I had called upon my friend, Mr. Sherlock Holmes, one day in the autumn
+This tool will receive a input txt file(files) or directory(directories) and transform it in an HTML page(pages).
+
+# For Example:
+
+```
+
+example.txt:
+
+"I had called upon my friend, Mr. Sherlock Holmes, one day in the autumn
 of last year, and found him in deep conversation with a very stout,
 florid-faced, elderly gentleman, with fiery red hair. With an apology
 for my intrusion, I was about to withdraw, when Holmes pulled me
 abruptly into the room and closed the door behind me."
 ```
+
 will become:
+
 ```
 example.html
 
@@ -40,50 +44,56 @@ example.html
 
 </body>
 </html>
- ```
+```
 
 # How do I use it?
+
 ```
   To use this tool, you need to type in the CLI the following:
   node GMOT-SSG.js -i <file> -o <output> -s <stylesheet>
-  
+
   examples:
   node GMOT-SSG.js -i text.txt text2.txt -o C:\user\example\output -s stylesheetlink
   node GMOT-SSG.js -input directory1 directory2 -output outputFolder  -stylesheet stylesheetlink
   node GMOT-SSG.js -i text.txt directory1 text2.txt C:\user\example\directory2
-  node GMOT-SSG.js -c ./ssg-config.json   
-  ```
-  
+  node GMOT-SSG.js -c ssg-config.json
+```
+
 By default, this tool will create a "dist" directory in its folder where the output will be.
-  
-  # What options does it have?
-  ```
-  This tool has an
-  -s --stylesheet option, which will take your input stylesheet link and place it inside the HTML.
-  -o --output option, this option will place the output in your custom output directory.
-  -v --version option, will display the current version of the program.
-  -h --help option, will display the usage, options, and examples.
-  -c --config option, will read the config JSON file for arguments instead of command line.
-  ```
-  What optional features does it have?
-  ```
-  <Title> and <h1> tags
-   -s -stylesheet for custom css links
-   -o --output for custom output paths
-   It also accepts mixed input, txt files and directories.
-   ```
-   
+
+# What options does it have?
+
+```
+This tool has an
+-s --stylesheet option, which will take your input stylesheet link and place it inside the HTML.
+-o --output option, this option will place the output in your custom output directory.
+-v --version option, will display the current version of the program.
+-h --help option, will display the usage, options, and examples.
+-c --config option, will read the config JSON file for arguments instead of command line.
+```
+
+What optional features does it have?
+
+```
+<Title> and <h1> tags
+ -s -stylesheet for custom css links
+ -o --output for custom output paths
+ It also accepts mixed input, txt files and directories.
+```
+
 # Additional support for md (markdown) files
 
-| MD File | HTML File | Webpage |
-| ------------- | ------------- | ------------- |
-| ```**Bold Text**``` | ```<b>Bold Text</b>``` | **Bold Text** |
-| ```*Italic Text*``` | ```<i>Italic Text</i>``` | *Italic Text* |
-| ```# H1 Heading``` | ```<h1>H1 Heading</h1>``` | <h1>H1 Heading</h1> |
-| ```## H2 Heading``` | ```<h2>H2 Heading</h2>``` | <h2>H2 Heading</h2> |
-| ```[GitHub](https://github.com/)``` | ```<a href="https://github.com/">GitHub</a>``` | [GitHub](https://github.com/) |
+| MD File                         | HTML File                                  | Webpage                       |
+| ------------------------------- | ------------------------------------------ | ----------------------------- |
+| `**Bold Text**`                 | `<b>Bold Text</b>`                         | **Bold Text**                 |
+| `*Italic Text*`                 | `<i>Italic Text</i>`                       | _Italic Text_                 |
+| `# H1 Heading`                  | `<h1>H1 Heading</h1>`                      | <h1>H1 Heading</h1>           |
+| `## H2 Heading`                 | `<h2>H2 Heading</h2>`                      | <h2>H2 Heading</h2>           |
+| `[GitHub](https://github.com/)` | `<a href="https://github.com/">GitHub</a>` | [GitHub](https://github.com/) |
+| `---`                           | `<hr />`                                   | <hr />                        |
 
 # For Example (md files):
+
 ```
 README Excerpt
 
@@ -92,7 +102,7 @@ README Excerpt
 
 OSD600 0.1 - SSG
 
-## SSG - Static Site Generator 
+## SSG - Static Site Generator
 
 ## What this tool does?
 
@@ -121,4 +131,3 @@ will become:
 </body>
 </html>
 ```
-  

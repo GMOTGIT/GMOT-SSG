@@ -7,47 +7,24 @@
 //read mix input, relative or absolute paths - ex: my ssg -i thisIsaTxtfile.txt thisIsaDirectory C://user/Desktop/thisIsAlsoAnotherDirectory
 
 const fs = require("fs");
-const yargs = require("yargs/yargs");
-const { hideBin } = require("yargs/helpers");
 const path = require("path");
-
 const htmlMaker = require("./htmlMaker");
-
-const argv = yargs(hideBin(process.argv))
-  .usage("Usage: $0 <command> [file or directory]")
-  .example(
-    "$0 SSG -i myExample.txt directoryPath",
-    "myExample.html and txtFromDirectory.html is created"
-  )
-  .alias("l", "lang")
-  .alias("i", "input")
-  .array("i")
-  .describe("i", "Load a file or a directory")
-  .help("h")
-  .alias("h", "help")
-  .alias("o", "output")
-  .describe("o", "Set a directory for output")
-  .alias("s", "stylesheet")
-  .describe("s", "Set a stylesheet for the template")
-  .version()
-  .alias("v", "version")
-  .alias("c", "config")
-  .describe("c", "Receive a Config File and read input from it")
-  .epilog("copyright 2021").argv;
+const argv = require("./yargsConfig");
 
 if (argv.c) {
-    try {
-      const jsonFile = fs.readFileSync(path.normalize(argv.c));
-      const data = JSON.parse(jsonFile);
-      argv.i = [data.input];
-      argv.s = data.stylesheet;
-      argv.l = data.lang || "en-CA";
-      argv.o = data.output || "./dist";
-    } catch (err) {
-      console.error("Unable to read JSON file.");
-      process.exit(1);
-    }
+  try {
+    const jsonFile = fs.readFileSync(path.normalize(argv.c));
+    const data = JSON.parse(jsonFile);
+    argv.i = [data.input];
+    argv.s = data.stylesheet;
+    argv.l = data.lang || "en-CA";
+    argv.o = data.output || "./dist";
+  } catch (err) {
+    console.error("Unable to read JSON file.");
+    process.exit(1);
+  }
 }
+
 //Check for Arguments
 if (!argv.i || !argv.i.length > 0) {
   // print a useful error message
