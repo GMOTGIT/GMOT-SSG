@@ -1,4 +1,5 @@
 const path = require("path");
+var md = require("markdown-it")();
 
 module.exports = htmlAssembler = (lines, txtInput, ss = "", argv_l) => {
   let paragraphs = "";
@@ -8,19 +9,17 @@ module.exports = htmlAssembler = (lines, txtInput, ss = "", argv_l) => {
   let title = lines.shift();
   lines.forEach((string) => {
     if (path.extname(txtInput) == ".md") {
-      string = string
-        .replace(/\*{2,}(.*?)\*{2,}/g, "<b>$1</b>")
-        .replace(/\*(.*?)\*/g, "<i>$1</i>")
-        .replace(/^##((.|\s)*$)/, "<h2>$1</h2>")
-        .replace(/^#((.|\s)*$)/, "<h1>$1</h1>")
-        .replace(/^---((.|\s)*$)/, "<hr>")
-        .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2">$1</a>');
+      var string = md.render(string);
     }
 
-    paragraphs +=
-      string.match(/<h1>/) || string.match(/<h2>/) || string.match(/<hr>/)
-        ? `${string}\n`
-        : `<p>${string}</p>\n`;
+    if (path.extname(txtInput) == ".txt") {
+      paragraphs +=
+        string.match(/<h1>/) || string.match(/<h2>/) || string.match(/<hr>/)
+          ? `${string}\n`
+          : `<p>${string}</p>\n`;
+    } else {
+      paragraphs += string;
+    }
   });
 
   let styleSheet = ss ? `<link rel="stylesheet" href="${ss}"></link>` : "";
