@@ -1,6 +1,6 @@
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
-
+/* eslint-disable no-undef */
 const argv = yargs(hideBin(process.argv))
   .usage("Usage: $0 <command> [file or directory]")
   .example(
@@ -23,4 +23,4 @@ const argv = yargs(hideBin(process.argv))
   .describe("c", "Receive a Config File and read input from it")
   .epilog("copyright 2021").argv;
 
-  module.exports = argv;
+module.exports = argv;

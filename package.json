@@ -4,7 +4,13 @@
   "description": "Gustavo Martinez SSG for OSD600",
   "main": "GMOT-SSG.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install",
+    "prettier": "npx prettier --write .",
+    "prettier-check": "prettier --check .",
+    "eslint": "eslint --config .eslintrc.js",
+    "eslint-fix": "eslint --config .eslintrc.js --fix",
+    "lint": "npm run eslint"
   },
   "keywords": [
     "SSG"
@@ -12,7 +18,19 @@
   "author": "Gustavo Tavares",
   "license": "MIT",
   "dependencies": {
+    "eslint-plugin-prettier": "^4.0.0",
     "markdown-it": "^12.2.0",
     "yargs": "^17.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.2.6",
+    "prettier": "2.4.1"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown",
+    "*.{js,css,md}": "prettier --write"
   }
 }

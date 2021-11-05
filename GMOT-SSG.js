@@ -6,6 +6,7 @@
 // <h1>Title</h1>
 //read mix input, relative or absolute paths - ex: my ssg -i thisIsaTxtfile.txt thisIsaDirectory C://user/Desktop/thisIsAlsoAnotherDirectory
 
+/*global process, removeDir*/
 const fs = require("fs");
 const path = require("path");
 const htmlMaker = require("./htmlMaker");
@@ -21,6 +22,7 @@ if (argv.c) {
     argv.o = data.output || "./dist";
   } catch (err) {
     console.error("Unable to read JSON file.");
+    // eslint-disable-next-line no-undef
     process.exit(1);
   }
 }

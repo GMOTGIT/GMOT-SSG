@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const path = require("path");
 var md = require("markdown-it")();
 
@@ -9,7 +10,7 @@ module.exports = htmlAssembler = (lines, txtInput, ss = "", argv_l) => {
   let title = lines.shift();
   lines.forEach((string) => {
     if (path.extname(txtInput) == ".md") {
-      var string = md.render(string);
+      string = md.render(string);
     }
 
     if (path.extname(txtInput) == ".txt") {
