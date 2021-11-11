@@ -4,9 +4,11 @@ var md = require("markdown-it")();
 
 module.exports = htmlAssembler = (lines, txtInput, ss = "", argv_l) => {
   let paragraphs = "";
-
-  lines = lines.toString().split(/\r?\n\r?\n/);
-
+  try {
+    lines = lines.toString().split(/\r?\n\r?\n/);
+  } catch (err) {
+    throw "Error:" + err;
+  }
   let title = lines.shift();
   lines.forEach((string) => {
     if (path.extname(txtInput) == ".md") {
