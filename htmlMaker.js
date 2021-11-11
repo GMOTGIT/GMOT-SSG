@@ -14,7 +14,7 @@ module.exports = htmlMaker = (
   //Ignore non txt files
   if (path.extname(txtInput) != ".txt" && path.extname(txtInput) != ".md") {
     console.error("File ignored, not a txt or md format: ", txtInput);
-    return;
+    return false;
   }
 
   fs.readFile(
@@ -23,7 +23,7 @@ module.exports = htmlMaker = (
     (err, lines) => {
       if (err) {
         console.error(err);
-        return;
+        return false;
       }
       let content = htmlAssembler(lines, txtInput, argv_s, argv_l);
 
@@ -31,4 +31,5 @@ module.exports = htmlMaker = (
       return;
     }
   );
+  return true;
 };

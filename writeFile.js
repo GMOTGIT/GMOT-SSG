@@ -2,9 +2,8 @@
 const fs = require("fs");
 const path = require("path");
 
-
 module.exports = writeFile = (argv_o = "dist", txtInput, content) => {
-  fs.writeFile(
+  fs.writeFileSync(
     `${path.normalize(argv_o)}/${
       path.parse(path.basename(txtInput)).name
     }.html`,
