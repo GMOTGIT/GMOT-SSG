@@ -25,6 +25,7 @@ GMOT-SSG welcomes contributions and suggestions of improvements!<br>
 
 - The project will format on save
 
+```
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
@@ -33,6 +34,17 @@ GMOT-SSG welcomes contributions and suggestions of improvements!<br>
   "editor.codeActionsOnSave": {
   "source.fixAll": true
   }
+```
+
+## Testing
+
+- To run tests for the project you must type
+
+```
+npm run test
+```
+
+After all tests have been passed, and the code is indented, feel free to make a Pull Request.
 
 You PR will be reviewed as soon as possible!
 Thank you for your help!
