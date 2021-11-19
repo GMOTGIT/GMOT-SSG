@@ -16,4 +16,5 @@ module.exports = writeFile = (argv_o = "dist", txtInput, content) => {
       }
     }
   );
+  return true;
 };
