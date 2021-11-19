@@ -12,8 +12,10 @@ module.exports = htmlMaker = (
   argv_l = "en-CA"
 ) => {
   //Ignore non txt files
+
   if (path.extname(txtInput) != ".txt" && path.extname(txtInput) != ".md") {
-    console.error("File ignored, not a txt or md format: ", txtInput);
+    //Console.error
+    console.log("File ignored, not a txt or md format: ", txtInput);
     return false;
   }
 
