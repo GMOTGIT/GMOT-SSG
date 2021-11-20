@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`End to End testing should print nothing when the program runs succesfully 1`] = `""`;
+
+exports[`End to End testing should print the version of the program when --version is specified 1`] = `"1.0.0"`;
+
+exports[`End to End testing should print usage and options when --help option is specified 1`] = `
+"Usage: GMOT-SSG.js <command> [file or directory]
+
+Options:
+  -i, --input       Load a file or a directory                           [array]
+  -h, --help        Show help                                          [boolean]
+  -o, --output      Set a directory for output
+  -s, --stylesheet  Set a stylesheet for the template
+  -c, --config      Receive a Config File and read input from it
+  -v, --version     Show version number                                [boolean]
+
+Examples:
+  GMOT-SSG.js SSG -i myExample.txt          myExample.html and
+  directoryPath                             txtFromDirectory.html is created
+
+copyright 2021"
+`;
