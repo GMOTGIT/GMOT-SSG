@@ -1,6 +1,6 @@
 {
   "name": "gmot-ssg",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Gustavo Martinez SSG for OSD600",
   "main": "GMOT-SSG.js",
   "bin": "GMOT-SSG.js",
