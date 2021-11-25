@@ -8,10 +8,17 @@ OSD600 0.1 - SSG
 
 This tool will receive a input txt file(files) or directory(directories) and transform it in an HTML page(pages).
 
+## How to Install?
+
+To install our package, you need to type the following line in your console:
+
+```
+npm i gmot-ssg
+```
+
 # For Example:
 
 ```
-
 example.txt:
 
 "I had called upon my friend, Mr. Sherlock Holmes, one day in the autumn
@@ -50,13 +57,13 @@ example.html
 
 ```
   To use this tool, you need to type in the CLI the following:
-  node GMOT-SSG.js -i <file> -o <output> -s <stylesheet>
+  npx gmot-ssg -i <file> -o <output> -s <stylesheet>
 
   examples:
-  node GMOT-SSG.js -i text.txt text2.txt -o C:\user\example\output -s stylesheetlink
-  node GMOT-SSG.js -input directory1 directory2 -output outputFolder  -stylesheet stylesheetlink
-  node GMOT-SSG.js -i text.txt directory1 text2.txt C:\user\example\directory2
-  node GMOT-SSG.js -c ssg-config.json
+  npx gmot-ssg -i text.txt text2.txt -o C:\user\example\output -s stylesheetlink
+  npx gmot-ssg -input directory1 directory2 -output outputFolder  -stylesheet stylesheetlink
+  npx gmot-ssg -i text.txt directory1 text2.txt C:\user\example\directory2
+  npx gmot-ssg -c ssg-config.json
 ```
 
 By default, this tool will create a "dist" directory in its folder where the output will be.
@@ -68,6 +75,7 @@ This tool has an
 -s --stylesheet option, which will take your input stylesheet link and place it inside the HTML.
 -o --output option, this option will place the output in your custom output directory.
 -v --version option, will display the current version of the program.
+-l --language option, will let you set the language for the HTML.
 -h --help option, will display the usage, options, and examples.
 -c --config option, will read the config JSON file for arguments instead of command line.
 ```
@@ -78,7 +86,8 @@ What optional features does it have?
 <Title> and <h1> tags
  -s -stylesheet for custom css links
  -o --output for custom output paths
- It also accepts mixed input, txt files and directories.
+ -l --language for custom HTML language, default is en-CA.
+ It also accepts mixed input, txt files, md files and directories.
 ```
 
 # Additional support for md (markdown) files
