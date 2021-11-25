@@ -2,7 +2,7 @@
 
 exports[`End to End testing should print nothing when the program runs succesfully 1`] = `""`;
 
-exports[`End to End testing should print the version of the program when --version is specified 1`] = `"1.0.0"`;
+exports[`End to End testing should print the version of the program when --version is specified 1`] = `"1.0.1"`;
 
 exports[`End to End testing should print usage and options when --help option is specified 1`] = `
 "Usage: GMOT-SSG.js <command> [file or directory]
