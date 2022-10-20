@@ -1,8 +1,4 @@
-# GMOT-SSG
-
-OSD600 0.1 - SSG
-
-## SSG - Static Site Generator
+# GMOT-SSG - Static Site Generator
 
 ## What this tool does?
 
