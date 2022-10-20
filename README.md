@@ -12,7 +12,9 @@ To install our package, you need to type the following line in your console:
 npm i gmot-ssg
 ```
 
-# For Example:
+# What it does?
+### Example: 
+
 
 ```
 example.txt:
